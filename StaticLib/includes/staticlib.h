@@ -1,0 +1,1 @@
+void run_from_staticlib(void);

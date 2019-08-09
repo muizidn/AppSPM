@@ -1,0 +1,4 @@
+module CxxWrapper {
+    header "../cxxwrapper.h"
+    export *
+}

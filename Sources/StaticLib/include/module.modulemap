@@ -1,0 +1,4 @@
+module StaticLib {
+    header "staticlib.h"
+    export *
+}
