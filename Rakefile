@@ -5,10 +5,22 @@ task :staticlib do
   puts `clang -c  src/staticlib.c`
   puts `ar rcs staticlib.a staticlib.o`
   Dir.chdir '..'
+  puts "task: staticlib done"
+end
+
+def carthage_options
+  kOpts = [
+    "--cache-builds",
+    "--no-use-binaries",
+    "--platform",
+    "macOS"
+  ]
+  kOpts.map { |i| i }.join(" ")
 end
 
 task :carthagebuild do
-  puts `carthage update --cache-builds --no-use-binaries --platform macOS`
+  puts `carthage update #{carthage_options}`
+  puts "task: carthagebuild done"
 end
 
 def swift_options
@@ -29,9 +41,11 @@ end
 
 task :swiftbuild do
   puts `swift build #{swift_options}`
+  puts "task: swiftbuild done"
 end
 
 task :run do
+  puts "task: run starts"
   puts `./.build/x86_64-apple-macosx/debug/app`
 end
 
@@ -48,4 +62,5 @@ task :bootstrap do
       Dir.chdir pwd
     end
   end
+  puts "task: bootstrap done"
 end
