@@ -1,0 +1,60 @@
+name: App
+options:
+  usesTabs: false
+  indentWidth: 2
+  tabWidth: 2
+targets:
+  cli:
+    type: application
+    platform: [macOS]
+    settings:
+      MACOS_DEPLOYMENT_TARGET: 10.14
+    sources:
+      - Sources/cli
+    dependencies:
+      - target: App_macOS
+  App:
+    type: framework
+    platform: [macOS]
+    settings:
+      MACOS_DEPLOYMENT_TARGET: 10.14
+      OTHER_LDFLAGS:
+            - $(SRCROOT)/StaticLib/staticlib.a
+    sources:
+      - Sources/App
+    dependencies:
+      - target: CLib_macOS
+      - target: CxxWrapper_macOS
+      - target: StaticLib_macOS
+  CLib:
+    type: framework
+    platform: [macOS]
+    settings:
+      MACOS_DEPLOYMENT_TARGET: 10.14
+    sources:
+      - Sources/CLib
+  CxxLib:
+    type: framework
+    platform: [macOS]
+    settings:
+      MACOS_DEPLOYMENT_TARGET: 10.14
+    sources:
+      - Sources/CxxLib
+  CxxWrapper:
+    type: framework
+    platform: [macOS]
+    settings:
+      MACOS_DEPLOYMENT_TARGET: 10.14
+    sources:
+      - Sources/CxxWrapper
+    dependencies:
+      - target: CxxLib_macOS
+  StaticLib:
+    type: framework
+    platform: [macOS]
+    settings:
+      MACOS_DEPLOYMENT_TARGET: 10.14
+      OTHER_LDFLAGS:
+            - $(SRCROOT)/StaticLib/staticlib.a
+    sources:
+      - Sources/StaticLib
