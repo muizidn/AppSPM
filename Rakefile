@@ -7,9 +7,12 @@ task :staticlib do
   Dir.chdir '..'
 end
 
-task :build do
+task :carthagebuild do
   puts `carthage update --cache-builds --no-use-binaries --platform macOS`
-  puts `swift build`
+end
+
+task :swiftbuild do
+  puts `swift build -Xswiftc -F./Carthage/Build/Mac -Xlinker ./StaticLib/staticlib.a`
 end
 
 task :run do

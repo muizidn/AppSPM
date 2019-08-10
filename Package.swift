@@ -17,7 +17,10 @@ package.targets = [
             dependencies: ["App"]),
         .target(
             name: "App",
-            dependencies: ["CLib", "CxxWrapper", "StaticLib"]),
+            dependencies: ["CLib", "CxxWrapper", "StaticLib"],
+            linkerSettings: [
+                .linkedFramework("NIO"),
+            ]),
         .target(
             name: "CLib"),
         .target(
@@ -29,10 +32,5 @@ package.targets = [
                 .define("UPPERCASE")
             ]),
         .target(
-            name: "StaticLib",
-            linkerSettings: [
-                .unsafeFlags([
-                    "./StaticLib/staticlib.a"
-                ])
-            ]),
+            name: "StaticLib"),
 ]
