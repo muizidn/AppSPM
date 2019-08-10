@@ -11,8 +11,24 @@ task :carthagebuild do
   puts `carthage update --cache-builds --no-use-binaries --platform macOS`
 end
 
+def swift_options
+  kOpts = {
+    "-Xswiftc" => [
+      "-F./Carthage/Build/Mac"
+    ],
+    "-Xlinker" => [
+      "./StaticLib/staticlib.a",
+      "-rpath",
+      "./Carthage/Build/Mac"
+    ]
+  }
+  kOpts.map { |key, value| 
+    value.map { |i| "#{key} #{i}" }.join(" ")
+  }.join(" ")
+end
+
 task :swiftbuild do
-  puts `swift build -Xswiftc -F./Carthage/Build/Mac -Xlinker ./StaticLib/staticlib.a`
+  puts `swift build #{swift_options}`
 end
 
 task :run do
