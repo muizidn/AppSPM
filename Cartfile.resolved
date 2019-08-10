@@ -1,1 +1,2 @@
 github "ReactiveX/RxSwift" "5.0.1"
+github "apple/swift-nio" "2.6.1"

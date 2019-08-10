@@ -26,6 +26,7 @@ targets:
       - target: CLib_macOS
       - target: CxxWrapper_macOS
       - target: StaticLib_macOS
+      - carthage: NIO
   CLib:
     type: framework
     platform: [macOS]
